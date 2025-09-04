@@ -1,13 +1,13 @@
 /* CSS Variables and Reset */
 :root {
-    --bg: #ffffff;
-    --text: #0a0a0a;
-    --muted: #6b7280;
-    --green: #16a34a;
-    --neon: #39ff88;
-    --dark: #0b1e13;
-    --card: #f8fdf9;
-    --border: #d1fae5;
+     --bg: #f8fafc;
+    --text: #1e293b;
+    --muted: #64748b;
+    --green: #0ea5e9;        /* Ocean blue */
+    --neon: #f97316;         /* Vibrant orange */
+    --dark: #0f172a;         /* Deep navy */
+    --card: #ffffff;
+    --border: #e2e8f0;
     
     --space-1: 4px;
     --space-2: 8px;
@@ -150,7 +150,7 @@ img {
     box-shadow: none;
 }
 
-/* Header */
+/* Header - UPDATED */
 .site-header {
     position: fixed;
     top: 0;
@@ -174,6 +174,7 @@ img {
     align-items: center;
     justify-content: space-between;
     height: 100%;
+     padding-top: 10px;
 }
 
 .logo-container {
@@ -186,39 +187,47 @@ img {
     font-size: 1.1rem;
 }
 
+/* UPDATED: Make logo bigger */
 .logo-img {
-    height: 50px;
+    height: 60px; /* Increased from 50px */
     width: auto;
     transition: height var(--transition-base);
 }
 
 .site-header.shrunk .logo-img {
-    height: 35px;
+    height: 45px; /* Increased from 35px to maintain proportion */
 }
 
 .company-name {
     white-space: nowrap;
 }
 
-/* Navigation */
+/* Navigation - UPDATED */
 .main-nav {
     display: flex;
     align-items: center;
 }
 
+/* UPDATED: Add proper alignment */
 .nav-links {
     display: flex;
     list-style: none;
     gap: var(--space-6);
     margin: 0;
+    align-items: center; /* Key fix: centers all nav items vertically */
 }
 
+/* UPDATED: Ensure all nav links align properly */
 .nav-link {
     position: relative;
     padding: var(--space-2) 0;
     font-weight: 500;
     color: var(--text);
     transition: color var(--transition-fast);
+    display: flex;
+    align-items: center; /* Ensures dropdown trigger aligns with other links */
+    min-height: 44px; /* Minimum touch target size */
+    line-height: 1.4;
 }
 
 .nav-link::after {
@@ -236,28 +245,36 @@ img {
     width: 100%;
 }
 
-/* Dropdown */
+/* Dropdown - UPDATED */
 .nav-dropdown {
     position: relative;
+    display: flex;
+    align-items: center; /* Centers the dropdown container */
 }
 
+/* UPDATED: Ensure dropdown trigger aligns with other nav links */
 .dropdown-trigger {
     display: flex;
     align-items: center;
     gap: var(--space-2);
+    padding: var(--space-2) 0; /* Same padding as other nav links */
+    min-height: 44px; /* Same minimum height as other nav links */
+    line-height: 1.4;
 }
 
 .dropdown-arrow {
     transition: transform var(--transition-fast);
+    flex-shrink: 0; /* Prevents arrow from shrinking */
 }
 
 .nav-dropdown:hover .dropdown-arrow {
     transform: rotate(180deg);
 }
 
+/* UPDATED: Improve dropdown menu positioning */
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     left: 0;
     min-width: 200px;
     background: var(--bg);
@@ -270,6 +287,7 @@ img {
     visibility: hidden;
     transform: translateY(10px);
     transition: all var(--transition-base);
+    z-index: 1001; /* Ensure it appears above other elements */
 }
 
 .nav-dropdown:hover .dropdown-menu,
@@ -312,14 +330,17 @@ img {
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
+    background: white;
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
     opacity: 0;
+    background: white;
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+    background: white;
 }
 
 /* Hero Section */
@@ -963,6 +984,15 @@ img {
     
     .container {
         padding: 0 var(--space-4);
+    }
+    
+    /* UPDATED: Mobile logo size */
+    .logo-img {
+        height: 50px; /* Slightly smaller on mobile but still bigger than before */
+    }
+    
+    .site-header.shrunk .logo-img {
+        height: 40px;
     }
     
     /* Mobile Navigation */
