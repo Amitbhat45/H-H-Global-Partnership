@@ -12,6 +12,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -71,25 +75,33 @@
                     <div class="container">
                         <h2 class="section-title" style="color: var(--bg); margin-bottom: 40px;">Spices Enquiry</h2>
                         
-                        <form id="spices-enquiry-form" class="enquiry-form" novalidate style="max-width: 600px; margin: 0 auto;">
+                        <!-- Updated Netlify Form -->
+                        <form name="spices-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-spices.html" class="enquiry-form" style="max-width: 600px; margin: 0 auto;">
+                            
+                            <!-- Required hidden fields for Netlify -->
+                            <input type="hidden" name="form-name" value="spices-enquiry" />
+                            <input type="hidden" name="subject" value="New Spices Enquiry - H&H Global Partnerships" />
+                            
+                            <!-- Honeypot field for spam protection (hidden) -->
+                            <p class="hidden">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </p>
+                            
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Name *</label>
                                     <input type="text" id="name" name="name" required minlength="2">
-                                    <span class="error-message"></span>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="mobile">Mobile No *</label>
-                                    <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10,15}">
-                                    <span class="error-message"></span>
+                                    <input type="tel" id="mobile" name="mobile" required>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="email">Email *</label>
                                 <input type="email" id="email" name="email" required>
-                                <span class="error-message"></span>
                             </div>
                             
                             <div class="form-group">
@@ -101,22 +113,20 @@
                                     <option value="both">Both Black Pepper & Cardamom</option>
                                     <option value="other-spices">Other Spices</option>
                                 </select>
-                                <span class="error-message"></span>
                             </div>
                             
                             <div class="form-group">
                                 <label for="message">Message / Requirements *</label>
                                 <textarea id="message" name="message" rows="5" required minlength="10" placeholder="Please specify quantities, grades, packaging requirements, or any other details..."></textarea>
-                                <span class="error-message"></span>
                             </div>
                             
-                            <div class="form-group captcha-group">
-                                <label id="captcha-label">What is 5 + 3?</label>
+                            <!-- Simple math captcha (optional, Netlify has spam protection) -->
+                            <div class="form-group">
+                                <label for="captcha">Simple Math: What is 5 + 3? *</label>
                                 <input type="number" id="captcha" name="captcha" required>
-                                <span class="error-message"></span>
                             </div>
                             
-                            <button type="submit" class="cta-button primary" disabled>Send Spices Enquiry</button>
+                            <button type="submit" class="cta-button primary">Send Spices Enquiry</button>
                         </form>
                     </div>
                 </section>
@@ -174,39 +184,7 @@
         </svg>
     </a>
 
-    <!-- Toast Container -->
-    <div id="toast-container" class="toast-container"></div>
-
     <script src="assets/js/main.js"></script>
-    <script>
-        // Additional form handling for spices page
-        document.addEventListener('DOMContentLoaded', function() {
-            const spicesForm = document.getElementById('spices-enquiry-form');
-            if (spicesForm) {
-                // Update form ID for this specific form
-                spicesForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form data
-                    const formData = new FormData(spicesForm);
-                    const data = Object.fromEntries(formData.entries());
-                    
-                    console.log('Spices enquiry submitted:', data);
-                    
-                    // Show success message
-                    if (window.showToast) {
-                        showToast('Spices enquiry submitted successfully! We will contact you soon with detailed information.', 'success');
-                    }
-                    
-                    // Reset form
-                    spicesForm.reset();
-                    
-                    // Disable submit button
-                    const submitBtn = spicesForm.querySelector('button[type="submit"]');
-                    submitBtn.disabled = true;
-                });
-            }
-        });
-    </script>
+    <!-- Removed the form JavaScript since Netlify handles it now -->
 </body>
 </html>
