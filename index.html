@@ -328,47 +328,70 @@
         </section>
 
         <!-- Contact Form Section -->
-        <section id="contact-us" class="contact-section section-reveal">
-            <div class="container">
-                <h2 class="section-title">Products Enquiry</h2>
+       <section id="contact-us" class="contact-section section-reveal">
+    <div class="container">
+        <h2 class="section-title">Products Enquiry</h2>
+        
+        <!-- Updated Netlify Form -->
+        <form name="general-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-general.html" class="enquiry-form"netlify>
+            
+            <!-- Required hidden fields for Netlify -->
+            <input type="hidden" name="form-name" value="general-enquiry" />
+            <input type="hidden" name="subject" value="New General Products Enquiry - H&H Global Partnerships" />
+            
+            <!-- Honeypot field for spam protection (hidden) -->
+            <p style="display: none;">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required minlength="2">
+                </div>
                 
-                <form id="enquiry-form" class="enquiry-form" novalidate>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" required minlength="2">
-                            <span class="error-message"></span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="mobile">Mobile No *</label>
-                            <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10,15}">
-                            <span class="error-message"></span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
-                        <span class="error-message"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" rows="5" required minlength="10"></textarea>
-                        <span class="error-message"></span>
-                    </div>
-                    
-                    <div class="form-group captcha-group">
-                        <label id="captcha-label">What is 5 + 3?</label>
-                        <input type="number" id="captcha" name="captcha" required>
-                        <span class="error-message"></span>
-                    </div>
-                    
-                    <button type="submit" class="cta-button primary" disabled>Send Enquiry</button>
-                </form>
+                <div class="form-group">
+                    <label for="mobile">Mobile No *</label>
+                    <input type="tel" id="mobile" name="mobile" required>
+                </div>
             </div>
-        </section>
+            
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="product-interest">Product Interest</label>
+                <select id="product-interest" name="product-interest" style="width: 100%; padding: var(--space-4); border: 2px solid var(--muted); border-radius: var(--border-radius); background: var(--bg); color: var(--text); font-size: 1rem;">
+                    <option value="">Select product category (optional)</option>
+                    <option value="spices">Spices (Black Pepper, Cardamom)</option>
+                    <option value="fruits">Fruits (Bananas, Mangoes)</option>
+                    <option value="vegetables">Vegetables (Onions, Potatoes)</option>
+                    <option value="coconuts">Coconuts & Coconut Products</option>
+                    <option value="coffee-beans">Coffee Beans (Robusta, Arabica)</option>
+                    <option value="cashew">Cashew Nuts</option>
+                    <option value="multiple-products">Multiple Products</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="5" required minlength="10" placeholder="Please describe your requirements, quantities, target markets, or any specific questions..."></textarea>
+            </div>
+            
+            <!-- Simple math captcha -->
+            <div class="form-group">
+                <label for="captcha">Simple Math: What is 5 + 3? *</label>
+                <input type="number" id="captcha" name="captcha" required>
+            </div>
+            
+            <button type="submit" class="cta-button primary">Send Enquiry</button>
+        </form>
+    </div>
+</section>
+
     </main>
 
     <!-- Footer -->

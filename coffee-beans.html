@@ -12,6 +12,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    
+    <style>
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -71,25 +75,33 @@
                     <div class="container">
                         <h2 class="section-title" style="color: var(--bg); margin-bottom: 40px;">Coffee Beans Enquiry</h2>
                         
-                        <form id="coffee-enquiry-form" class="enquiry-form" novalidate style="max-width: 600px; margin: 0 auto;">
+                        <!-- Updated Netlify Form -->
+                        <form name="coffee-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-coffee.html" class="enquiry-form" style="max-width: 600px; margin: 0 auto;"netlify>
+                            
+                            <!-- Required hidden fields for Netlify -->
+                            <input type="hidden" name="form-name" value="coffee-enquiry" />
+                            <input type="hidden" name="subject" value="New Coffee Beans Enquiry - H&H Global Partnerships" />
+                            
+                            <!-- Honeypot field for spam protection (hidden) -->
+                            <p class="hidden">
+                                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                            </p>
+                            
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="name">Name *</label>
                                     <input type="text" id="name" name="name" required minlength="2">
-                                    <span class="error-message"></span>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="mobile">Mobile No *</label>
-                                    <input type="tel" id="mobile" name="mobile" required pattern="[0-9]{10,15}">
-                                    <span class="error-message"></span>
+                                    <input type="tel" id="mobile" name="mobile" required>
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="email">Email *</label>
                                 <input type="email" id="email" name="email" required>
-                                <span class="error-message"></span>
                             </div>
                             
                             <div class="form-group">
@@ -104,22 +116,20 @@
                                     <option value="ground-coffee">Ground Coffee</option>
                                     <option value="instant-coffee">Instant Coffee</option>
                                 </select>
-                                <span class="error-message"></span>
                             </div>
                             
                             <div class="form-group">
                                 <label for="message">Message / Requirements *</label>
                                 <textarea id="message" name="message" rows="5" required minlength="10" placeholder="Please specify quantities, grades, roast levels, packaging requirements, or any other details..."></textarea>
-                                <span class="error-message"></span>
                             </div>
                             
-                            <div class="form-group captcha-group">
-                                <label id="captcha-label">What is 12 + 8?</label>
+                            <!-- Simple math captcha -->
+                            <div class="form-group">
+                                <label for="captcha">Simple Math: What is 12 + 8? *</label>
                                 <input type="number" id="captcha" name="captcha" required>
-                                <span class="error-message"></span>
                             </div>
                             
-                            <button type="submit" class="cta-button primary" disabled>Send Coffee Enquiry</button>
+                            <button type="submit" class="cta-button primary">Send Coffee Enquiry</button>
                         </form>
                     </div>
                 </section>
@@ -177,42 +187,7 @@
         </svg>
     </a>
 
-    <!-- Toast Container -->
-    <div id="toast-container" class="toast-container"></div>
-
     <script src="assets/js/main.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const coffeeForm = document.getElementById('coffee-enquiry-form');
-            if (coffeeForm) {
-                let captchaAnswer = 20; // 12 + 8
-                
-                coffeeForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const captcha = document.getElementById('captcha');
-                    if (parseInt(captcha.value) !== captchaAnswer) {
-                        if (window.showToast) {
-                            showToast('Please solve the captcha correctly', 'error');
-                        }
-                        return;
-                    }
-                    
-                    const formData = new FormData(coffeeForm);
-                    const data = Object.fromEntries(formData.entries());
-                    
-                    console.log('Coffee enquiry submitted:', data);
-                    
-                    if (window.showToast) {
-                        showToast('Coffee beans enquiry submitted successfully! We will contact you with detailed coffee specifications.', 'success');
-                    }
-                    
-                    coffeeForm.reset();
-                    const submitBtn = coffeeForm.querySelector('button[type="submit"]');
-                    submitBtn.disabled = true;
-                });
-            }
-        });
-    </script>
+    <!-- Removed the form JavaScript since Netlify handles it now -->
 </body>
 </html>
