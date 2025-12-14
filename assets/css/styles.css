@@ -198,9 +198,27 @@ img {
     height: 45px; /* Increased from 35px to maintain proportion */
 }
 
+.company-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
 .company-name {
+    font-family: 'Poppins', 'Inter', sans-serif; /* font change */
+    font-size: 1.1rem;
+    font-weight: 700;
     white-space: nowrap;
 }
+
+.company-tagline {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.6px;
+    margin-top: 2px;
+}
+
 
 /* Navigation - UPDATED */
 .main-nav {
@@ -500,6 +518,23 @@ img {
     padding: var(--space-7) 0;
     background: var(--card);
 }
+
+/* Slightly bigger branding in Snapshot section */
+.snapshot-section .company-name {
+    font-size: 2rem;   /* default ~1.1rem → slightly bigger */
+    font-weight: 800;
+}
+
+.snapshot-section .company-tagline {
+    font-size: 1rem;  /* default ~0.7rem → slightly bigger */
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+}
+
+.snapshot-section .inline-logo {
+    height: 70px;  /* subtle increase */
+}
+
 
 .company-title {
     display: flex;
